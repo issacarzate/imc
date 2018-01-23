@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">BMI</string>
+    <string name="nombre">Nombre:</string>
+    <string name="peso">Peso: 56</string>
+    <string name="altura">Altura: 1.6</string>
+    <string name="IMC">Calcula IMC</string>
+</resources>
