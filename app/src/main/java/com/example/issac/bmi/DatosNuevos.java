@@ -9,32 +9,32 @@ import android.widget.EditText;
 
 public class DatosNuevos extends Activity {
 
-    private EditText peso, altura;
+    private EditText peso2, altura2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_datos_nuevos);
-        peso = (EditText) findViewById(R.id.peso);
-        altura = (EditText) findViewById(R.id.altura);
+        peso2 = (EditText) findViewById(R.id.peso2);
+        altura2 = (EditText) findViewById(R.id.altura2);
     }
     public void calcula(View view){
-        Persona p = new Persona();
-        String pesoStr = peso.getText().toString();
-        String alturaStr = altura.getText().toString();
+        Persona per = new Persona();
+        String pesoStr = peso2.getText().toString();
+        String alturaStr = altura2.getText().toString();
         if(TextUtils.isEmpty(pesoStr)){
-            peso.setError("Captura un dato!");
+            peso2.setError("Captura un dato!");
             return;
         }
         if(TextUtils.isEmpty(alturaStr)){
-            altura.setError("Captura un dato!");
+            altura2.setError("Captura un dato!");
             return;
         }
-        p.peso = Double.parseDouble(pesoStr);
-        p.altura = Double.parseDouble(alturaStr);
+        per.peso = Double.parseDouble(pesoStr);
+        per.altura = Double.parseDouble(alturaStr);
 
         Intent intent = new Intent(DatosNuevos.this,ResultadosActivity.class);
-        intent.putExtra("persona", p);
+        intent.putExtra("persona", per);
         setResult(RESULT_OK, intent);
         super.finish();
     }

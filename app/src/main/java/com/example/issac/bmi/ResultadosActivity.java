@@ -5,13 +5,15 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 public class ResultadosActivity extends Activity {
-    private TextView nombre, imc, ideal, energy;
+    private TextView nombre, imc, ideal, energy, imc2,ideal2,energy2;
     private ImageView imageView;
+    private Persona p;
 
     private final int REQUEST_CODE = 7007;
 
@@ -26,7 +28,7 @@ public class ResultadosActivity extends Activity {
         energy = (TextView) findViewById(R.id.energia);
         imageView = (ImageView) findViewById(R.id.imagen);
 
-        Persona p = (Persona) getIntent().getSerializableExtra("persona");
+        p = (Persona) getIntent().getSerializableExtra("persona");
 
         double imcDouble = p.peso / Math.pow(p.altura, 2.0);
         double idealDouble = Math.pow(p.altura, 2.0) * 22;
@@ -104,7 +106,7 @@ public class ResultadosActivity extends Activity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
         if(resultCode == RESULT_OK && requestCode == REQUEST_CODE){
             if(data.hasExtra("persona")){
-                Persona nueva = (Persona) getIntent().getSerializableExtra("persona");
+                Persona nueva = (Persona) data.getSerializableExtra("persona");
 
                 double imcDouble = nueva.peso / Math.pow(nueva.altura, 2.0);
                 double idealDouble = Math.pow(nueva.altura, 2.0) * 22;
@@ -114,12 +116,8 @@ public class ResultadosActivity extends Activity {
                 ideal.setText(String.valueOf(idealDouble));
                 energy.setText(String.valueOf(energiaDouble));
 
-                imc = (TextView) findViewById(R.id.imc);
-                ideal = (TextView) findViewById(R.id.pesoIdeal);
-                energy = (TextView) findViewById(R.id.energia);
-                imageView = (ImageView) findViewById(R.id.imagen);
 
-                if(nueva.sexo.equalsIgnoreCase("mujer")){
+                if(p.sexo.equalsIgnoreCase("mujer")){
                     if(imcDouble<=17.5 && imcDouble<18.5){
                         imageView.setImageResource(R.drawable.woman_bmi_17_5);
                     }
@@ -139,7 +137,7 @@ public class ResultadosActivity extends Activity {
                         imageView.setImageResource(R.drawable.woman_bmi_40);
                     }
                 }
-                if(nueva.sexo.equalsIgnoreCase("hombre")){
+                if(p.sexo.equalsIgnoreCase("hombre")){
                     if(imcDouble<=17.5 && imcDouble<18.5){
                         imageView.setImageResource(R.drawable.men_bmi_17_5);
                     }
