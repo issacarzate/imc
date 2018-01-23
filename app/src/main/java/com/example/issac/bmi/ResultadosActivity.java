@@ -88,7 +88,7 @@ public class ResultadosActivity extends Activity {
         startActivityForResult(intent, REQUEST_CODE);
     }
     public void openBMI(View view){
-        String url = "https://www.google.com";
+        String url = "https://es.wikipedia.org/wiki/%C3%8Dndice_de_masa_corporal";
         Intent i = new Intent(Intent.ACTION_VIEW);
         i.setData(Uri.parse(url));
         startActivity(i);
@@ -109,7 +109,6 @@ public class ResultadosActivity extends Activity {
                 double imcDouble = nueva.peso / Math.pow(nueva.altura, 2.0);
                 double idealDouble = Math.pow(nueva.altura, 2.0) * 22;
                 double energiaDouble = idealDouble * 30;
-                nombre.setText(nueva.nombre);
 
                 imc.setText(String.valueOf(imcDouble));
                 ideal.setText(String.valueOf(idealDouble));
@@ -119,6 +118,47 @@ public class ResultadosActivity extends Activity {
                 ideal = (TextView) findViewById(R.id.pesoIdeal);
                 energy = (TextView) findViewById(R.id.energia);
                 imageView = (ImageView) findViewById(R.id.imagen);
+
+                if(nueva.sexo.equalsIgnoreCase("mujer")){
+                    if(imcDouble<=17.5 && imcDouble<18.5){
+                        imageView.setImageResource(R.drawable.woman_bmi_17_5);
+                    }
+                    if(imcDouble>=18.5 && imcDouble<22.0){
+                        imageView.setImageResource(R.drawable.woman_bmi_18_5);
+                    }
+                    if(imcDouble>=22.0 && imcDouble<24.9){
+                        imageView.setImageResource(R.drawable.woman_bmi_22);
+                    }
+                    if(imcDouble>=24.9 && imcDouble<30.0){
+                        imageView.setImageResource(R.drawable.woman_bmi_24_9);
+                    }
+                    if(imcDouble>=30.0 && imcDouble<40.0){
+                        imageView.setImageResource(R.drawable.woman_bmi_30);
+                    }
+                    if(imcDouble>=40.0){
+                        imageView.setImageResource(R.drawable.woman_bmi_40);
+                    }
+                }
+                if(nueva.sexo.equalsIgnoreCase("hombre")){
+                    if(imcDouble<=17.5 && imcDouble<18.5){
+                        imageView.setImageResource(R.drawable.men_bmi_17_5);
+                    }
+                    if(imcDouble>=18.5 && imcDouble<22.0){
+                        imageView.setImageResource(R.drawable.men_bmi_18_5);
+                    }
+                    if(imcDouble>=22.0 && imcDouble<24.9){
+                        imageView.setImageResource(R.drawable.men_bmi_22_0);
+                    }
+                    if(imcDouble>=24.9 && imcDouble<30.0){
+                        imageView.setImageResource(R.drawable.men_bmi_24_9);
+                    }
+                    if(imcDouble>=30.0 && imcDouble<40.0){
+                        imageView.setImageResource(R.drawable.men_bmi_30);
+                    }
+                    if(imcDouble>=40.0){
+                        imageView.setImageResource(R.drawable.men_bmi_40);
+                    }
+                }
             }
         }
     }
